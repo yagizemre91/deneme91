@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><title>Basketbol</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f6f1ea;--card:#fff;--tx:#1d1a17;--mu:#6b625a;--ac:#d9531e;--bl:#2a6fd1;--ln:#b9aea2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15130f;--card:#221f1a;--tx:#f3ede6;--mu:#a69c91;--ac:#ff7a3d;--bl:#6aa6ff;--ln:#5a5148}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:6px 0 12px}h2{font-size:20px;margin:6px 0 10px}h3{font-size:16px;margin:14px 0 4px}
+.card,.row{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:8px 0;font:inherit;cursor:pointer}
+.card b{display:block;font-size:17px}.card span,.row small{color:var(--mu);font-size:14px}
+.row{padding:11px 14px;border-radius:10px;margin:5px 0}.row.off{opacity:.55;cursor:default}.row.on{border-color:var(--ac)}
+.back{background:none;border:0;color:var(--ac);font:inherit;padding:6px 0;cursor:pointer}
+.tabs{display:flex;gap:6px;margin:12px 0}.tabs button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit;cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.box{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px}
+.box.sum{border-left:4px solid var(--ac);margin-bottom:4px}
+ul{padding-left:20px;margin:6px 0}li{margin:4px 0}
+.court{width:100%;max-width:440px;display:block;margin:0 auto}
+.ln{fill:none;stroke:var(--ln);stroke-width:1.2}.rim{fill:none;stroke:var(--ac);stroke-width:2.5}
+.mv{fill:none;stroke:var(--ac);stroke-width:1.8;stroke-linecap:round}.ps{fill:none;stroke:var(--bl);stroke-width:1.6;stroke-dasharray:4 3.5;stroke-linecap:round}
+.po{fill:var(--ac)}.px{fill:var(--mu)}.pt{fill:#fff;font:700 10px system-ui;text-anchor:middle}
+.lb{fill:var(--mu);font:600 10px system-ui;text-anchor:middle}
+.bd{fill:var(--card);stroke:var(--tx);stroke-width:1}.bn{fill:var(--tx);font:700 8px system-ui;text-anchor:middle}
+.cap{margin:10px 0 0;padding-left:0;list-style:none}.cap li{margin:6px 0}
+.key{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--mu);margin-top:10px}
+.key i{display:inline-block;width:22px;height:0;border-top:4px solid var(--ac);vertical-align:middle;margin-right:5px}.key i.d{border-top:4px dashed var(--bl)}
+.vid{display:block;padding:12px;margin:8px 0;border:1px solid var(--ln);border-radius:12px;color:var(--tx);text-decoration:none;background:var(--bg)}
+.vid small{display:block;color:var(--mu)}
+.note{font-size:13px;color:var(--mu);margin-top:10px}
+</style></head><body><main id="app"></main>
+<script>
+var YT="https://www.youtube.com/results?search_query=";
+function G(s){return s.split("|")}
+var C=[
+{t:"Temel Hareketler",g:[
+["Topsuz hareketler",G("V-cut|L-cut|Backdoor cut|Front cut|Basket cut|Flash cut|Curl cut|Flare cut|Fade cut|UCLA cut|Shuffle cut|Shallow cut|45-degree cut|Give-and-go|Pass-and-cut|Cut behind the defender|Cut and replace|Drift|Lift|Shake|Relocate|Circle movement|Fill the empty spot|Transition lane running")],
+["Paslar",G("Chest pass|Bounce pass|Overhead pass|One-hand push pass|Baseball pass|Hook pass|Pocket pass|Skip pass|Swing pass|Extra pass|Post entry pass|High-low entry|Lob pass|Drop-off pass|Kick-out pass|Outlet pass|Touch pass|Handoff|Reverse pass|Post split pass|No-look pass|Passing out of a trap|Passing angle|Passing window|Pass fake")],
+["Top kontrolü ve karar",G("Triple threat|Jab step|Shot fake|Ball protection|Change of pace|Change of direction|Hesitation|Crossover|Between-the-legs|Behind-the-back|In-and-out|Retreat dribble|Escape dribble|Spin move|Split the hedge|Reject the screen|Snake dribble|Hang dribble|Protect the dribble|Read the low man|Jump stop|One-two stop|Pivot foot|Front pivot|Reverse pivot")],
+["Bitirişler",G("Right-hand layup|Left-hand layup|Reverse layup|Power layup|Two-foot power finish|One-foot finish|Floater|Hook shot|Jump hook|Baby hook|Up-and-under|Euro step|Pro hop|Spin finish|Inside-hand finish|Outside-hand finish|Reverse pivot finish|Drop step finish|Up-fake finish|Putback|Tip-in|Dunk finish|Contact finish|Baseline finish|Reverse-side finish")],
+["Post oyunu",G("Deep post position|Seal|Duck-in|Front seal|Swim move|Drop step|Baseline drop step|Middle drop step|Jump hook (post)|Turnaround jumper|Face-up|Rip-through|Up-and-under (post)|Shoulder fake|Middle move|Baseline move|Counter move|High-low post game|Post re-seal|Post kick-out|Post split|Post isolation|Post-up vs switch|Short-roll playmaking")],
+["Şut çeşitleri",G("Catch-and-shoot|Pull-up jumper|Step-back jumper|Side-step jumper|Fadeaway|Spot-up shooting|Relocation shooting|Corner three|Wing three|Above-the-break three|Pick-and-pop shot|Trail three|Pick-and-roll pull-up|Elbow jumper|Short-corner jumper|Free-throw routine|Shot preparation|Footwork into the catch|One-two footwork|Hop footwork|Shot selection|Shot clock awareness|Contested-shot awareness|Shot fake into drive|Shot fake into pull-up")]]},
+{t:"Hücum Setleri",g:[
+["Perdeler",G("Ball screen|Off-ball screen|Down screen|Up screen|Back screen|Flare screen|Pin-down screen|Cross screen|Flex screen|Staggered screen|Double screen|Ram screen|Spain pick-and-roll|Hammer screen|Ghost screen|Slip screen|Re-screen|Flip screen|Step-up screen|Drag screen|Trail screen|Wide pin-down|Screen-the-screener|Elevator screen|Veer screen|Exit screen|DHO screen|Seal screen")],
+["Perde kullanımı",G("Screen angle|Set feet|Roll|Pop|Short roll|Hard roll|Pocket pass angle|Reject the screen (screen)|Mismatch after switch|Seal after screen")],
+["Dizilişler",G("5-Out|4-Out 1-In|3-Out 2-In|Horns|1-4 High|1-4 Low|Box|Double Stack|Single Stack|2-1-2|1-3-1|2-3 High|Diamond|1-2-2|Spread|Open Post|Empty Corner|Strong-side overload|Weak-side overload")],
+["Hücum sistemleri",G("Motion|5-Out Motion|4-Out Motion|3-Out Motion|Read and React|Continuity|Flex|Shuffle|Swing|Princeton|Triangle|Dribble-Drive Motion|Pace-and-Space|Pass-and-Cut|Pass-and-Screen-Away|UCLA|Triple Post|Wheel|Delay|Open-Post|Chin|Zoom Continuity|Ball-Screen Continuity")],
+["Set aileleri",G("Horns Series|Box Series|Elbow Series|UCLA Series|Flex Series|Floppy|Iverson|Zipper|Chicago|Pistol|Zoom|Stack pick-and-roll|Double Drag|Ram|Veer|Hammer|Ghost Screen Action|Empty-side pick-and-roll|Side pick-and-roll|High pick-and-roll|Angle pick-and-roll|Flat pick-and-roll|High-Low action|Post Split action|Guard-to-guard screen|Cross-screen action|Staggered-screen action|Flare-screen action|Pin-down action|DHO series|Elbow Get|Horns Twist|Horns Flare|Horns Chicago|Horns Double Drag|Horns High-Low")],
+["İki ve üç oyunculu oyunlar",G("Pick-and-Roll|Pick-and-Pop|Give-and-Go|DHO|Pass-and-Screen|Screen-and-Roll|Screen-and-Slip|Post entry and cut|Post entry and screen-away|High-Low|Isolation|Reject PnR|Re-screen PnR|Short-roll two-man game|Spain PnR|Three-man weave|Triangle passing|Drive-kick-extra pass|Staggered screen into DHO|Double drag into corner lift|Drive-drift-lift|High-low with weak-side cut")],
+["Hızlı hücum",G("Outlet and go|Primary break|Secondary break|Early offense|3-on-2|2-on-1|4-on-3|Trailer three|Rim run|Wide lane running|Pitch-ahead pass|Advance pass|Drag screen in transition|Cross-match attack|Transition seal|Transition post-up|Stop-ball recognition|Sprint back")],
+["Alan savunmasına hücum",G("vs 2-3 Zone|vs 3-2 Zone|vs 1-3-1 Zone|vs 1-2-2 Zone|vs 2-1-2 Zone|vs Match-up Zone|vs Box-and-One|vs Triangle-and-Two|Zone overload|High-post flash|Short-corner attack|Baseline runner|Skip pass (zone)|Ball reversal|Middle penetration|High-low passing|Screening the zone|Gap attack|Seal the middle|Corner overload|Baseline overload|Attack the seams")],
+["Baskıyı aşma",G("Full-court press break|Half-court press break|1-2-1-1 alignment|2-1-2 alignment|1-4 alignment|2-2-1 alignment|Diamond press break|Sideline trap escape|Middle flash|Reverse the ball|Safety outlet|Diagonal release|Backcourt overload|Middle receiver|Dribble escape|Press break to fast break|Trap avoidance|Inbound safety|Breaking a denial|Handling a double-team")],
+["Özel durumlar",G("BLOB|SLOB|Baseline box|Baseline stack|Baseline diamond|Sideline box|Sideline stack|Sideline diamond|Inbound to post-up|Inbound to lob|Inbound to backdoor|Inbound to corner three|Inbound to handoff|ATO|Quick hitter|Last-second shot|Two-for-one|Late-clock isolation|Late-clock pick-and-roll|End-of-quarter play|Need-two / need-three|Intentional foul response|Second-chance offense|Mismatch hunting|Attack the closeout|Weak-side lift|Corner drift|Nail drive|Clear-out|Decoy cut|Decoy screen|Fake handoff|Shot-clock management")]]},
+{t:"Savunma",g:[
+["Bire bir savunma",G("Defensive stance|Low hips|Active hands|Defensive slides|Drop step recovery|Contain the ball|Force baseline|Force middle|Force weak hand|Angle containment|Closeout|Chop steps|High hand contest|Verticality|Recover to the ball|Mirror the ball handler|Cut off the drive|Rear-view contest|Transition containment|Hip discipline|Crossover anticipation|Hand discipline|Avoid reaching|Contest without fouling")],
+["Topsuz savunma",G("Denial|One-pass-away|Two-pass-away|Ball-you-man|Gap help|Nail help|Low-man help|Tag the roller|Stunt and recover|Help and recover|X-out rotation|Scram switch|Peel switch|Closeout rotation|Low-man rotation|Tag-and-release|Baseline help|Weak-side awareness|Backdoor prevention|Top-locking|Face-guarding|Bumping cutters|Switch communication|Early help|Recovering to shooters")],
+["Takım savunması ilkeleri",G("Help-side|Ball-side|Weak-side protection|Shell defense|Paint protection|Rim protection|No-middle|Force baseline defense|Pack-line|Nail positioning|Scramble defense|Defensive communication|Matchup identification|Transition defense|Stop-ball principle|Box-out responsibility|Deflection creation|Defensive rebounding|Don’t foul principle")],
+["Perde savunması",G("Drop coverage|Deep drop|Level coverage|Show|Hedge|Hard hedge|Blitz|Trap|Switch|ICE|Down coverage|Weak coverage|Under|Over|Chase|Switch-and-scram|Pre-switch|Late switch|Short-roll coverage|Weak-side X-out|Reject coverage|Re-screen coverage|Spain PnR coverage|Empty-side PnR coverage|Transition drag-screen coverage")],
+["Alan savunmaları (listede yoktu, eklendi)",G("2-3 Zone|3-2 Zone|1-3-1 Zone|1-2-2 Zone|2-1-2 Zone|Match-up Zone|Box-and-One|Triangle-and-Two")]]}
+];
+var PL=[[118,74,"5","o"],[126,98,"X","x"],[150,196,"1","o"]];
+var TOP={
+"Baseline drop step":{t:"Drop Step (Dip Çizgiye)",
+ ozet:["Defender’ı sırtında tutup baseline tarafına büyük bir adımla geçersin.","Topu block’un biraz üstünde, first hash mark civarında almak iyi açı sağlar.","Finish genelde backboard’dan ve contact altında yapılır."],
+ yazi:["<b>Pozisyon:</b> Block’a fazla derin inme, first hash mark’ta (block’un biraz üstü) pozisyon al ki iki yöne de alanın olsun. Alçak ve geniş stance’te iki elini pasöre göster (target hands).","<b>Read:</b> Topu jump stop ile alırsan istediğin ayak pivot olabilir. Defender’ın nerede olduğunu hisset.","<b>Hareket:</b> Defender paint tarafındaysa, baseline tarafındaki ayağını (drop foot) defender’ın arkasına doğru geri at, pivot ayağın üzerinde baseline’a dön. Bir power dribble ile rim’e git.","<b>Finish:</b> Topu vücudunla koru (ball protection), kollarını yukarıda tut, genelde backboard’dan bitir. Adım büyük ve hızlı olmalı."],
+ hata:["Block’un çok altında topu almak (kötü açı)","Küçük ve yavaş adım","Topu aşağıda tutmak"],
+ p:PL,a:[["p","M150 184 Q122 140 121 88",134,140,"1"],["m","M110 66 Q102 46 130 38",100,52,"2"]],
+ cap:["Pasör topu block’un biraz üstündeki 5 numaraya verir (entry pass).","5 numara baseline tarafındaki ayağını geri atıp baseline’a döner, rim’e gider."],
+ v:[["Coach’s Clipboard: Baseline Drop Step","https://coachesclipboard.net/video/CDPPDropStepL.html"],["Breakthrough Basketball: Drop Step","https://www.breakthroughbasketball.com/drills/Drop-Step.html"]],q:"basketball baseline drop step post move"},
+"Middle drop step":{t:"Drop Step (Ortaya)",
+ ozet:["Aynı hareketin middle (paint içi) yönüne yapılan versiyonu.","Baseline’ı kapatan defender’a karşı alternatiftir.","Baseline drop step’e karşı counter olarak da kullanılır."],
+ yazi:["<b>Fikir:</b> Defender’ı yine sırtında tutarsın ama bu sefer middle’a, paint’in içine geçersin.","<b>Hareket:</b> Topu aldıktan sonra diğer ayağı pivot yap, serbest ayağını defender’ın arkasına atarak middle’a dön. Rim’de kontrollü bitir.","<b>Neden önemli:</b> Defender baseline’ı kapatmaya başlayınca seçeneğin olur. İki yönü de öğren, birini diğerinin counter’ı yap."],
+ hata:["Tek yöne alışıp okunmak","Dengeyi kaybetmek"],
+ p:PL,a:[["p","M150 184 Q122 140 121 88",134,140,"1"],["m","M126 68 Q150 68 150 48",146,70,"2"]],
+ cap:["Pasör topu 5 numaraya verir.","5 numara middle’a dönüp rim’de bitirir."],
+ v:[["Breakthrough Basketball: Drop Step","https://www.breakthroughbasketball.com/drills/Drop-Step.html"]],q:"basketball middle drop step post move"},
+"Counter move":{t:"Drop Step Karşı Hamle",
+ ozet:["Defender geri çekilirse bitirmek yerine reverse pivot ile dönüp şut atarsın.","Defender yerinde kalırsa drop step ile geçersin.","Önce drop step oturmalı, karşı hamle sonra eklenmeli."],
+ yazi:["<b>Read:</b> Defender seni kapatırsa drop step ile geç. Geri çekilirse boşluk açılır, shot tehdidin artar.","<b>Hareket:</b> Drop step adımından sonra bitirmek yerine inside (reverse) pivot yap, rim’e square up ol ve dengeli jump shot at.","<b>İpucu:</b> Rahat olmadığın şutu zorlama, gerekirse topu perimeter’a verip re-post yap."],
+ hata:["Dengesiz şut","İlk hareket oturmadan karşı hamle denemek"],
+ p:[[118,74,"5","o"],[126,98,"X","x"]],a:[["m","M110 66 Q103 56 114 48",100,58,"1"],["m","M118 54 Q128 66 134 80",134,62,"2"]],
+ cap:["5 numara drop step başlatır.","Defender geri çekilince reverse pivot ile dönüp şut atar."],
+ v:[["Breakthrough Basketball: Drop Step Counter","https://www.breakthroughbasketball.com/drills/Drop-Step-Counter.html"]],q:"basketball drop step counter reverse pivot jump shot"},
+"Box":{t:"Box Seti",
+ozet:["Dört oyuncu paint’in köşelerinde (iki block, iki elbow), point guard top of the key’de.","Cross screen ve down screen gibi perdelere başlangıç olur.","Aynı diziliş farklı action’lara dönüşebilir (Box Series)."],
+yazi:["<b>Diziliş:</b> 4 ve 5 numaralar iki block’ta, 2 ve 3 numaralar iki elbow’da, 1 numara top of the key’de durur.","<b>Seçenekler:</b> Block’taki big’ler cross screen ya da down screen kurabilir, elbow’daki guard’lar bu perdelerle açılıp catch-and-shoot ya da cut yapabilir.","<b>Read:</b> Defense perdeleri switch ederse mismatch ara, perdeyi kapatırsa backdoor cut ile cezalandır."],
+hata:["Oyuncuların birbirine fazla yakın durması (spacing bozulur)","Perde sonrası boşalan spot’u doldurmamak"],
+p:[[150,176,"1","o"],[108,72,"4","o"],[192,72,"5","o"],[108,132,"2","o"],[192,132,"3","o"]],
+a:[["p","M143 170 L116 140",124,160,"1"],["m","M198 124 Q222 86 162 52",216,96,"2"]],
+cap:["1 numara topu elbow’daki 2 numaraya verir.","Pas sonrası 3 numara basket cut yapabilir, block’taki big’ler perde ya da seal seçeneklerini sunar."],
+v:[],q:"basketball box set offense explained",kontrol:1},
+"Pick-and-Roll":{t:"Pick-and-Roll",
+ozet:["Ball handler ile screener arasındaki temel iki kişilik oyun.","Screener ball screen kurar, sonra rim’e roll ya da perimeter’a pop yapar.","Ball handler perdeden sonra shoot, drive ya da pas seçeneğini okur."],
+yazi:["<b>Kurulum:</b> Screener, ball handler’ın defender’ına doğru açı vererek ball screen kurar. Ayaklar sabit olmalı (set feet), yoksa offensive foul olur.","<b>Ball handler:</b> Perdeye omuz omuza yakın geçer (rub), defender’ı screener’a sürükler.","<b>Seçenekler:</b> Roll to the rim, pop, short roll, pull-up jumper, reject ya da split.","<b>Read:</b> Drop coverage’a karşı pull-up, hedge ya da blitz’e karşı short roll ve pocket pass, switch’e karşı mismatch ara."],
+hata:["Perdeyi hareket halinde kurmak (moving screen)","Ball handler’ın perdeye geç ve uzak girmesi","Weak side spacing’in bozulması"],
+p:[[130,178,"1","o"],[172,160,"5","o"],[132,160,"X","x"],[170,138,"X","x"],[50,98,"2","o"],[250,98,"3","o"],[60,44,"4","o"]],
+a:[["m","M138 172 Q166 174 186 152",176,180,"1"],["m","M180 148 Q200 108 158 58",200,112,"2"]],
+cap:["1 numara 5 numaranın ball screen’ini kullanır.","5 numara screen sonrası rim’e roll yapar."],
+v:[],q:"basketball pick and roll explained",kontrol:1},
+"Spain PnR":{t:"Spain Pick-and-Roll",
+ozet:["Pick-and-roll’a üçüncü bir oyuncunun back screen eklemesi.","Roll yapan big’in defender’ı perdeyle karşılaşır, rim’e daha açık gidebilir.","Perdeyi kuran oyuncu sonra shooter olarak açılabilir."],
+yazi:["<b>Diziliş:</b> 1 numara ball handler, 5 numara ball screener, 3 numara weak side’da bekler.","<b>Hareket:</b> 5 numara roll yaparken 3 numara onun defender’ına arkadan back screen kurar. Böylece roller rim’e daha rahat gider.","<b>Seçenekler:</b> Roller’a pas (lob ya da pocket pass), 1 numaranın pull-up’ı ya da 3 numaranın pop out olup üç sayılık şut atması.","<b>Read:</b> Back screen’i ve roll’u hangi defender’ın karşıladığına bak, açılan oyuncuyu bul."],
+hata:["Back screen’in geç gelmesi (timing)","Pası roll başlamadan vermek"],
+p:[[130,178,"1","o"],[172,160,"5","o"],[132,160,"X","x"],[170,138,"X","x"],[210,94,"3","o"]],
+a:[["m","M138 172 Q166 174 186 152",176,180,"1"],["m","M180 148 Q200 108 158 58",198,128,"2"],["m","M204 104 L182 134",208,122,"3"]],
+cap:["1 numara ball screen’i kullanır.","5 numara roll yaparken 3 numara onun defender’ına back screen kurar.","Roller rim’e açık gider, 3 numara pop out yapabilir."],
+v:[],q:"basketball spain pick and roll explained",kontrol:1},
+"Triple threat":{t:"Triple Threat",
+ozet:["Topu aldığında shoot, pass ve drive tehdidini aynı anda taşıdığın duruş.","Topu alır almaz dribble başlatma, önce defender’ı oku.","Jab step ile defender’ın tepkisine göre karar ver."],
+yazi:["<b>Duruş:</b> Topu al, basket’e square up ol. Böylece basket’i, defender’ı ve açık takım arkadaşlarını aynı anda görürsün.","<b>Pivot:</b> Pas sonrası hızlı ve sert bir pivot ile defender’a dön, topu koru (ball protection). Ağırlığını pivot ayağında tut.","<b>Read:</b> Non-pivot ayağınla kısa bir jab step at ve defender’ın ayak ve kollarına bak. Defender geri çekilirse jab ayağını geri alıp jump shot at. Defender yan tarafa kayarsa cross-over step ile drive et.","<b>Dikkat:</b> Topu alır almaz sektirirsen dribble’ını erken harcarsın ve tehdidini kaybedersin."],
+hata:["Topu alır almaz dribble başlatmak","Ağırlığı pivot ayağından kaldırmak","Topu aşağıda, korumasız tutmak"],
+v:[["Coach’s Clipboard: Outside Moves (triple threat, jab step, video içerir)","https://www.coachesclipboard.net/OutsideMoves.html"]],q:"basketball triple threat position jab step"},
+"Jump stop":{t:"Jump Stop",
+ozet:["İki ayağın aynı anda yere indiği durma tekniği.","Pas alırken jump stop yaparsan iki ayaktan biri pivot ayağı olabilir.","Dengeyi korur, shoot ya da pass seçeneğini hemen açar."],
+yazi:["<b>Nasıl:</b> Son adım bir hop olmalı ve iki ayak aynı anda yere inmeli. İnerken ağırlığını biraz geriye yasla ki momentum yavaşlasın.","<b>Pivot:</b> Topu jump stop ile alırsan istediğin ayağı pivot yapabilirsin. Post oyuncuları için özellikle işe yarar.","<b>Dikkat:</b> Dribble sonrası jump stop’ta travel kuralı sık karıştırılır. Kuralı oynadığın lig ya da hakem yorumuyla kontrol et."],
+hata:["Ağırlığı öne verip dengeyi kaybetmek","Dribble sonrası travel yapmak","Ayakları genişliksiz, dar basmak"],
+v:[["Coach’s Clipboard: Footwork (jump stop ve pivot videosu içerir)","https://www.coachesclipboard.net/Footwork.html"]],q:"basketball jump stop pivot footwork drill"},
+"Give-and-Go":{t:"Give-and-Go",
+ozet:["Pas ver, hemen rim’e cut yap, return pass al.","Defender topa bakarken arkasına cut yapılır.","İki kişilik en basit hücum oyunudur."],
+yazi:["<b>Fikir:</b> Pas verdikten sonra durma. Defender’ın arkasından ya da önünden basket’e cut yap.","<b>Timing:</b> Pasın hemen ardından, defender topa bakarken (ball watching) cut’ı başlat ve hand target ver.","<b>Finish:</b> Return pass’i layup ya da catch-and-finish ile bitir."],
+hata:["Pas sonrası yerinde kalmak","Cut’a geç başlamak (defender geri döner)","Return pass için hedef vermemek"],
+p:[[150,196,"1","o"],[56,110,"2","o"]],
+a:[["p","M140 190 L66 118",94,158,"1"],["m","M158 188 Q182 120 154 58",184,128,"2"],["p","M66 102 Q110 62 146 54",96,70,"3"]],
+cap:["1 numara topu wing’deki 2 numaraya verir.","Pas sonrası 1 numara rim’e cut yapar.","2 numara return pass’i verir, 1 numara bitirir."],
+v:[],q:"basketball give and go explained",kontrol:1},
+"Closeout":{t:"Closeout",
+ozet:["Help side’dan topu yeni alan oyuncuya kontrollü yaklaşma.","Hızlı koş, son adımlarda chop step ile yavaşla.","Eller yukarıda, genelde baseline’a yönlendir."],
+yazi:["<b>Yaklaşma:</b> Pas gidince topa doğru sprint yap. Yaklaşırken defensive stance’e geç ve kısa chop step’lerle yavaşla.","<b>Eller:</b> High hand ile shot’ı contest et. Faul yapmamaya dikkat et.","<b>Yönlendirme:</b> Wing’deki oyuncuyu baseline’a, ortadaki oyuncuyu zayıf eline yönlendir (force baseline, force weak hand).","<b>Sonrası:</b> Topu yeni alan oyuncu drive ederse recover ve help rotasyonuna hazır ol."],
+hata:["Kontrolsüz koşup shooter’ı yanından kaçırmak","Ellerin aşağıda olması","Duruşta kalça yüksek kalmak"],
+v:[["Breakthrough Basketball: 5 Keys to Better Close Outs","https://www.breakthroughbasketball.com/defense/keys-close-outs"],["Coach’s Clipboard: Close-Out and Help-side Drill","https://coachesclipboard.net/DefenseCloseOutDrill.html"],["Coach’s Insider: 3-Line Close Out Drill","https://coachesinsider.com/mens-basketball/3-line-close-out-drill-with-nathan-davis-bucknell-univ"]],q:"basketball closeout defense technique"},
+"2-3 Zone":{t:"2-3 Zone Savunması",
+ozet:["En yaygın zone: iki oyuncu üstte, üç oyuncu paint’te.","Paint’i ve rebound pozisyonunu korur, dışarıdan şut verebilir.","Sürekli konuşma (communication) ve doğru rotasyon şart."],
+yazi:["<b>Diziliş:</b> İki guard top of the key’in iki yanında, üç oyuncu (iki wing-forward ve center) paint’in altında durur.","<b>Hareket:</b> Üstteki iki defender dribble penetration’ı durdurmak için ortaya pinch eder. Top wing’e gidince yakın üst defender topa çıkıp contest eder, alttakiler topa göre shift yapar.","<b>Skip pass:</b> Top wing’den wing’e geçerse savunma karşı tarafa rotasyon yapar. Üstteki iki defender’ın rotasyonu zone’un en kritik hareketidir.","<b>Rebound:</b> Her defender kendi adamını değil, en yakın rakibi box out eder."],
+hata:["Üstteki iki defender’ın rotasyonunda geç kalmak (high post açılır)","Konuşmamak, sessiz zone","Rebound’da kendi adamını aramak"],
+p:[[150,208,"1","o"],[44,150,"2","o"],[256,150,"3","o"],[34,58,"4","o"],[266,58,"5","o"],[120,148,"X","x"],[180,148,"X","x"],[110,86,"X","x"],[190,86,"X","x"],[150,68,"X","x"]],
+a:[["p","M140 202 L52 158",86,186,"1"],["m","M112 148 L62 150",86,138,"2"],["m","M104 94 L88 124",82,104,"3"]],
+cap:["Top of the key’den wing’e pas gider.","Yakın üst defender wing’e çıkıp topu contest eder.","Alttaki wing defender topa doğru shift yapıp paint’i korur."],
+v:[["Coach’s Clipboard: 2-3 Zone Defense (Al Marshall, video içerir)","https://www.coachesclipboard.net/Aggressive23zonedefense.html"],["Breakthrough Basketball: 2-3 Zone Defense, Tips, and Drills","https://www.breakthroughbasketball.com/defense/2-3zone.html"]],q:"basketball 2-3 zone defense explained"},
+"Horns":{t:"Horns Seti",
+ ozet:["İki big elbow’da, point guard top of the key’de başlar.","Pick-and-roll, DHO ve high-low için uygundur.","Birçok hücumun başlangıç dizilişidir."],
+ yazi:["<b>Diziliş:</b> 1 numara top of the key’de topla, 4 ve 5 numaralar iki elbow’da, 2 ve 3 numaralar wing ya da corner’da durur.","<b>Seçenekler:</b> 1 numara bir big’in ball screen’ini kullanabilir, DHO yapabilir ya da high-low oynayabilir.","<b>Read:</b> Defense’in ball screen’i nasıl savunduğuna (drop, hedge, switch) göre karar ver. Boşalan spot’u doldurmak (fill) setin parçasıdır."],
+ hata:["Boşalan spot’u doldurmamak","Defense’i okumadan aynı seçeneği zorlamak (no read)"],
+ p:[[150,176,"1","o"],[110,134,"4","o"],[190,134,"5","o"],[48,98,"2","o"],[252,98,"3","o"]],
+ a:[["p","M143 168 L119 142",124,160,"1"],["m","M158 168 Q176 154 188 146",178,168,"2"]],
+ cap:["1 numara topu elbow’daki 4 numaraya pas verebilir.","Ya da 5 numaranın ball screen’ini kullanıp ilerler."],
+ v:[],q:"basketball horns set offense explained",kontrol:1}
+};
+TOP["Spain pick-and-roll"]=TOP["Spain PnR"];
+function court(p,a){var s='<svg viewBox="0 0 300 230" class="court" role="img" aria-label="Saha şeması"><defs><marker id="mo" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0L5 2.5L0 5z" fill="#d9531e"/></marker><marker id="mb" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0L5 2.5L0 5z" fill="#2a6fd1"/></marker></defs><line x1="10" y1="22" x2="290" y2="22" class="ln"/><rect x="105" y="22" width="90" height="110" class="ln"/><path d="M110 132A40 40 0 0 0 190 132" class="ln"/><line x1="135" y1="28" x2="165" y2="28" class="ln"/><circle cx="150" cy="37" r="7" class="rim"/><text x="40" y="16" class="lb">DİP ÇİZGİ</text><text x="150" y="14" class="lb">POTA</text>';
+a.forEach(function(x){s+='<path d="'+x[1]+'" class="'+(x[0]=="m"?"mv":"ps")+'" marker-end="url(#'+(x[0]=="m"?"mo":"mb")+')"/>'});
+p.forEach(function(x){s+='<circle cx="'+x[0]+'" cy="'+x[1]+'" r="8.5" class="'+(x[3]=="o"?"po":"px")+'"/><text x="'+x[0]+'" y="'+(x[1]+3.5)+'" class="pt">'+x[2]+'</text>'});
+a.forEach(function(x){s+='<circle cx="'+x[2]+'" cy="'+x[3]+'" r="6.5" class="bd"/><text x="'+x[2]+'" y="'+(x[3]+3)+'" class="bn">'+x[4]+'</text>'});
+return s+'</svg>'}
+function li(a){return a.map(function(x){return"<li>"+x+"</li>"}).join("")}
+function intro(){return '<div style="text-align:center;padding:30px 0 6px"><svg viewBox="0 0 120 80" width="170" aria-hidden="true"><rect x="2" y="2" width="116" height="76" rx="6" fill="none" stroke="var(--ln)" stroke-width="1.5"/><path d="M60 2v76" stroke="var(--ln)" stroke-width="1.5"/><circle cx="60" cy="40" r="12" fill="none" stroke="var(--ln)" stroke-width="1.5"/><circle cx="60" cy="40" r="5" fill="var(--ac)"/></svg><h1 style="font-size:32px;margin:16px 0 8px">Oyunu oku.</h1><p style="color:var(--mu);margin:0 auto 22px;max-width:360px">Temel hareketlerden hücum setlerine ve savunmaya: yazılı anlatım, saha şeması ve video bir arada.</p><div style="display:flex;gap:8px;justify-content:center;margin-bottom:22px;color:var(--mu);font-size:14px"><span>✍️ Yazı</span><span>·</span><span>📐 Şema</span><span>·</span><span>▶ Video</span></div><button class="card" style="background:var(--ac);color:#fff;text-align:center;border:0;max-width:280px;margin:0 auto" onclick="location.hash=\'#k\'"><b>Başla</b></button></div>'}
+function home(){var h='<h1>Kategoriler</h1>';C.forEach(function(c,i){var n=0;c.g.forEach(function(g){n+=g[1].length});h+='<button class="card" onclick="location.hash=\'#c'+i+'\'"><b>'+c.t+'</b><span>'+c.g.length+' bölüm, '+n+' başlık</span></button>'});
+return h+'<p class="note">Beta sürüm. Turuncu çerçeveli başlıkların içeriği hazır, diğerleri sırayla doldurulacak.</p>'}
+function cat(i){var c=C[i],h='<button class="back" onclick="location.hash=\'#k\'">← Kategoriler</button><h2>'+c.t+'</h2>';
+c.g.forEach(function(g,j){h+='<button class="card" onclick="location.hash=\'#c'+i+'-'+j+'\'"><b>'+g[0]+'</b><span>'+g[1].length+' başlık</span></button>'});return h}
+function grp(i,j){var c=C[i],g=c.g[j],h='<button class="back" onclick="location.hash=\'#c'+i+'\'">← '+c.t+'</button><h2>'+g[0]+'</h2>';
+g[1].forEach(function(n){h+=TOP[n]?'<button class="row on" onclick="location.hash=\'#t-'+encodeURIComponent(n)+'\'">'+TOP[n].t+' <small>(içerik hazır)</small></button>':'<div class="row off">'+n+' <small>yakında</small></div>'});return h}
+function topic(n){var x=TOP[n];if(!x)return home();
+var h='<button class="back" onclick="history.back()">← Geri</button><h2>'+x.t+'</h2><div class="box sum"><b>Kısa özet</b><ul>'+li(x.ozet)+'</ul></div><div class="tabs"><button id="b0" class="on" onclick="tab(0)">Yazı</button>'+(x.p?'<button id="b1" onclick="tab(1)">Şema</button>':'')+'<button id="b2" onclick="tab(2)">Video</button></div>';
+h+='<div id="t0" class="box">'+x.yazi.map(function(z){return"<p>"+z+"</p>"}).join("")+'<h3>Sık yapılan hatalar</h3><ul>'+li(x.hata)+'</ul></div>';
+if(x.p)h+='<div id="t1" class="box" hidden>'+court(x.p,x.a)+'<ul class="cap">'+x.cap.map(function(c,k){return"<li><b>"+(k+1)+".</b> "+c+"</li>"}).join("")+'</ul><div class="key"><span><i></i>Hareket</span><span><i class="d"></i>Pas</span><span>Turuncu: hücum, gri X: savunma</span></div></div>';
+h+='<div id="t2" class="box" hidden>'+x.v.map(function(v){return'<a class="vid" href="'+v[1]+'" target="_blank" rel="noopener">▶ '+v[0]+'<small>Yeni sekmede açılır</small></a>'}).join("")+'<a class="vid" href="'+YT+encodeURIComponent(x.q)+'" target="_blank" rel="noopener">🔎 YouTube’da ara<small>“'+x.q+'”</small></a><p class="note">'+(x.kontrol?'Bu konunun kaynak kontrolü henüz yapılmadı.':'Bağlantılar sayfa açıklamalarına göre seçildi, videoyu izleyip doğrula.')+'</p></div>';
+return h}
+function tab(i){for(var j=0;j<3;j++){var t=document.getElementById("t"+j),b=document.getElementById("b"+j);if(t)t.hidden=j!=i;if(b)b.className=j==i?"on":""}}
+function route(){var h=location.hash.slice(1),a=document.getElementById("app"),m;
+if(!h)a.innerHTML=intro();else if(h=="k")a.innerHTML=home();else if(h.indexOf("t-")==0)a.innerHTML=topic(decodeURIComponent(h.slice(2)));
+else if(m=h.match(/^c(\d)-(\d+)$/))a.innerHTML=C[m[1]]&&C[m[1]].g[m[2]]?grp(+m[1],+m[2]):home();
+else if(m=h.match(/^c(\d)$/))a.innerHTML=C[m[1]]?cat(+m[1]):home();else a.innerHTML=home();window.scrollTo(0,0)}
+window.addEventListener("hashchange",route);route();
+</script></body></html>
